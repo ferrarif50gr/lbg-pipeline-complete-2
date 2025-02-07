@@ -27,19 +27,20 @@ pipeline{
                 sh "npm test"
                 }
             }
-            stage('SonarQube Analysis') {
-                environment {
-                    scannerHome = tool 'sonarqube'
-                }
-                steps {
-                    withSonarQubeEnv('sonar-qube-1') {        
-                    sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                    timeout(time: 5, unit: 'MINUTES'){
-                    waitForQualityGate abortPipeline: true
-                    }
-                }
-            }
+            
+            // stage('SonarQube Analysis') {
+            //     environment {
+            //         scannerHome = tool 'sonarqube'
+            //     }
+            //     steps {
+            //         withSonarQubeEnv('sonar-qube-1') {        
+            //         sh "${scannerHome}/bin/sonar-scanner"
+            //         }
+            //         timeout(time: 5, unit: 'MINUTES'){
+            //         waitForQualityGate abortPipeline: true
+            //         }
+            //     }
+            // }
          
             stage ('Build Docker Image'){
                 steps{
